@@ -36,6 +36,7 @@ body{
     color: white;
     background-color: black;
     border: none;
+    cursor: pointer;
 }
 
 #box-login{
@@ -179,7 +180,7 @@ img{
 
 .all-products{
     background-color: aliceblue;
-    padding-top: 10rem;
+    padding-top: 15rem;
     padding-bottom: 5rem;
 }
 
@@ -192,12 +193,12 @@ img{
 .all-products img{
     box-shadow: 0 0 1rem 0 rgba(0,0,0,0.2);
     border-radius: 2rem;
-    width: 85%;
+    width: 100%;
 }
 
 .all-products img:hover{
-    transform: scale(1.01);
-    transition: 0.5s;
+    transform: scale(1.02);
+    transition: 0.7s;
 }
 
 .clothing-list{
@@ -209,18 +210,25 @@ img{
 
 .clothing-list h3{
     padding-top: 1rem;
+    color: black;
+}
+
+.clothing-list__product{
+    text-decoration: none;
 }
 
 .clothing-list div{
     padding-bottom: 1rem;
+    color: black;
 }
 
 .clothing-list__details{
     padding: 2rem;
     flex-shrink: 0;
+    width: 30%;
 }
 
-.all-products a{
+.clothing-cart{
     background-color: white;
     color: black;
     border: 0.1rem #000 solid;
@@ -229,11 +237,21 @@ img{
     border-radius: 0.4rem;
 }
 
-.all-products a:hover{
-    background-color: #eee;
-    border-radius: 0.5rem;
-    transition: 0.6s;
+.product-details{
+    background-color: aliceblue;
+    padding-top: 15rem;
+    padding-bottom: 5rem;
 }
+
+#product-img{
+    box-shadow: 0 0 1rem 0 rgba(0,0,0,0.2);
+    border-radius: 2rem;
+    width: 30%;
+}
+
+
+
+
 
 .form--contact{
     width: 100%;

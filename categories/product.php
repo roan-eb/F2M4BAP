@@ -1,8 +1,23 @@
 <?php
 $con = require("connection.php");
 
-$result = $con->query('SELECT * FROM `women` ORDER BY RAND();');
+if(!isset($_GET['id'])){
+    echo "ID not set";
+    exit;
+}
 
+$id = $_GET['id'];
+$check_int = filter_var($id, FILTER_VALIDATE_INT);
+if($check_int == false){
+    echo "This is not a number (integer)";
+    exit;
+}
+
+$statement = $con->prepare('SELECT * FROM `women` WHERE id=?');
+$statement->bind_param('d', $id);
+$statement->execute();
+$result = $statement->get_result();
+    $product = $result->fetch_array(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +27,7 @@ $result = $con->query('SELECT * FROM `women` ORDER BY RAND();');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fine Clothes - Women</title>
+    <title>Fine Clothes</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="shortcut icon" href="" />
     <script src="/js/main.js" defer></script>
@@ -33,23 +48,20 @@ $result = $con->query('SELECT * FROM `women` ORDER BY RAND();');
         </nav>
     </header>
 
-    <div class="all-products">
-
-        <section class="clothing-list">
-
-            <?php foreach ($result as $row) : ?>
-                <article class="clothing-list__details">
-                    <a class="clothing-list__product" href="product.php?id=<?php echo $row['id']; ?>">
-                        <img class="clothing-list__photo" src="/img/women/<?php echo $row['picture']; ?>" alt="">
-                        <header>
-                            <h3><?php echo $row['title']; ?></h3>
-                            <div>€<?php echo $row['price']; ?></div>
-                        </header>
-                    </a>
-                </article>
-            <?php endforeach; ?>
-        </section>
+    <div class="product-details">
+    <section class="clothing-list">
+        <article>
+            <img id="product-img" src="/img/women/<?php echo $product['picture']?>" alt="">
+            <header>
+                <h3><?php echo $product['title']?></h3>
+                <div>€<?php echo $product['price']?></div>
+                <p><?php echo $product['description'] ?></p>
+            </header>
+            <a class="clothing-cart" href="">Add to cart</a>
+        </article>
+    </section>
     </div>
+
 
     <footer class="footer">
         <div class="social">
